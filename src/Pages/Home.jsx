@@ -1,30 +1,28 @@
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { client } from '../sanity';
+import { getAllPosts } from '../bloggData';
 
 export default function Home() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);//spara inläggen vi hämtar
 
   useEffect(() => {
-    client
-      .fetch(`*[_type == "post"]{title, slug}`)
-      .then((data) => {
-        console.log("Data från Sanity:", data);
-        setPosts(data);
-      })
-      .catch((err) => {
-        console.error("Fel vid hämtning från Sanity:", err);
-      });
+    //den körs när sidan laddas, hämtar alla inlägg från sanity
+    getAllPosts()
+    .then((data) => setPosts(data))//lagrar resultat
+    .catch((err) => console.error('kunde inte hämta inlägg', err))
   }, []);
+
 
   return (
     <section>
       <h1>Alla inlägg</h1>
+      {/*visar fallback om inga inlägg finns */}
       {posts.length === 0 ? (
         <p>Inga inlägg hittades</p>
       ) : (
         <ul>
+          {/*loopar igenom inläggen och visar länk */}
           {posts.map((post) => (
             <li key={post.slug.current}>
               <Link to={`/post/${post.slug.current}`}>
