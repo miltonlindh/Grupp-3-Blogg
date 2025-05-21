@@ -1,30 +1,3 @@
-/* .header-footer {
-  background-color: #FFC7C2;
-  padding: 1rem;
-  text-align: center;
-
-}
-
-.header-footer h1 {
-  color: #0000FF;
-  margin: 0;
-}
-
-.header-footer nav {
-  margin-top: 0.5rem;
-}
-
-.header-footer nav a {
-  color: #0000FF;
-  margin: 0 10px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.header-footer nav a:hover {
-  text-decoration: underline;
-} */
-
 .header-footer {
   background-color: #fcf0ef;
   border: 2px solid #FFC7C2;

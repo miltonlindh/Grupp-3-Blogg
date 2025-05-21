@@ -1,19 +1,3 @@
-// import "../Style/PostCard.css";
-
-// function PostCard({ title, text, imageUrl }) {
-//   return (
-//     <section className="post-card">
-//       <img src={imageUrl} alt={title} />
-//       <div className="post-text">
-//         <h2>{title}</h2>
-//         <p>{text}</p>
-//       </div>
-//     </section>
-//   );
-// }
-
-// export default PostCard;
-
 import "../Style/PostCard.css";
 
 function PostCard({ title, text, imageUrl }) {
