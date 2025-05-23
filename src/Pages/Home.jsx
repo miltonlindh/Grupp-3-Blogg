@@ -1,40 +1,22 @@
-
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getAllPosts } from '../bloggData';
-
+import { useEffect, useState } from "react";
+import PostList from "../components/posts/PostList";
+import { getAllPosts } from "../bloggData";
 export default function Home() {
-  const [posts, setPosts] = useState([]);//spara inläggen vi hämtar
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    //den körs när sidan laddas, hämtar alla inlägg från sanity
+    let mounted = true;
     getAllPosts()
-    .then((data) => setPosts(data))//lagrar resultat
-    .catch((err) => console.error('kunde inte hämta inlägg', err))
+      .then((data) => mounted && setPosts(data))
+      .catch((err) => mounted && setError("Kunde inte hämta inlägg"))
+      .finally(() => mounted && setLoading(false));
+    return () => (mounted = false);
   }, []);
 
+  if (loading) return <p>Laddar inlägg…</p>;
+  if (error)   return <p>{error}</p>;
 
-  return (
-    <section>
-      <h1>Alla inlägg</h1>
-      {/*visar fallback om inga inlägg finns */}
-      {posts.length === 0 ? (
-        <p>Inga inlägg hittades</p>
-      ) : (
-        <ul>
-          {/*loopar igenom inläggen och visar länk */}
-          {posts.map((post) => (
-            <li key={post.slug.current}>
-              <Link to={`/post/${post.slug.current}`}>
-                {post.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
-  );
+  return <PostList posts={posts} />;
 }
-
-
-
