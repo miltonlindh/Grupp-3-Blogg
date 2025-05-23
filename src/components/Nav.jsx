@@ -11,22 +11,23 @@ export default function Nav() {
             Home
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/bloggar" className={({ isActive }) => isActive ? 'active' : ''}>
-            Bloggar
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/category/:name" className={({ isActive }) => isActive ? 'active' : ''}>
-            Category
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/omoss" className={({ isActive }) => isActive ? 'active' : ''}>
-            Omoss
-          </NavLink>
-        </li>
-      </ul>
-    </nav>
-  );
+        
+      <li>
+        <NavLink to="/bloggar" className={({ isActive }) => isActive ? 'active' : ''}>
+          Bloggar
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/category" className={({ isActive }) => isActive ? 'active' : ''}>
+          Kategori
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/omoss" className={({ isActive }) => isActive ? 'active' : ''}>
+          Omoss
+        </NavLink>
+      </li>
+    </ul>
+  </nav>
+);
 }

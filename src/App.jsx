@@ -7,6 +7,8 @@ import Omoss from './pages/Omoss';
 import Home from './Pages/Home';
 import SinglePost from './Pages/SinglePost';
 import Category from './Pages/Category';
+import PostDetail from "./pages/PostDetail";
+import HeaderFooter from "./components/layout/HeaderFooter";
 import './App.css';
 
 function App() {
@@ -15,11 +17,9 @@ function App() {
       <Nav />
       <main className="app-main">
         <Routes>
-          <Route path="/" element={<Hem />} />
+          <Route path="/" element={<Home />} />
           <Route path="/bloggar" element={<Bloggar />} />
-          <Route path="/category" element={<Kategori />} />
           <Route path="/omoss" element={<Omoss />} />
-          <Route path="/home" element={<Home />} />
           <Route path="/post/:slug" element={<SinglePost />} />
           <Route path="/category/:name" element={<Category />} />
         </Routes>
