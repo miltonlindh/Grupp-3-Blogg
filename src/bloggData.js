@@ -1,20 +1,30 @@
-import { client } from './sanity'
+// src/bloggData.js
+import { client } from "./sanity";
 
-//hämtar alla inlägg
+// Alla publicerade poster (titel, slug + bild‑URL)
 export function getAllPosts() {
-    return client.fetch(`[_type == "post"]{title, slug}`);
+  return client.fetch(`*[_type == "post"]|order(_createdAt desc){
+    _id,
+    title,
+    slug,
+    mainImage{asset->{url}}
+  }`);
 }
-//hämtar inlägg baserat på slug används på /post/:slug
+
+// En post via slug
 export function getPostBySlug(slug) {
-    return client.fetch(
-        `[_type == "post" && slug.current == $slug][0]{title, body, mainImage}`,
-        { slug }
-    );
+  return client.fetch(`*[_type == "post" && slug.current == $slug][0]{
+    title,
+    body,
+    mainImage{asset->{url}}
+  }`, { slug });
 }
-//hämtar inlägg i en viss kategori används på /category/:name
+
+// Poster i en kategori
 export function getPostsByCategory(name) {
-    return client.fetch(
-        `*[_type == "post" && category->title == $name]{title, slug}`,
-        { name }
-    )
+  return client.fetch(`*[_type == "post" && references(*[_type == "category" && title == $name]._id)]{
+    title,
+    slug,
+    mainImage{asset->{url}}
+  }`, { name });
 }
