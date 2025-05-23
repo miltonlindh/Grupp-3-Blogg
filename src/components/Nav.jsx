@@ -12,13 +12,9 @@ export default function Nav() {
             Hem
           </NavLink>
         </li>
+        
         <li>
-          <NavLink to="/bloggar" className={({ isActive }) => isActive ? 'active' : ''}>
-            Bloggar
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/kategori" className={({ isActive }) => isActive ? 'active' : ''}>
+          <NavLink to="/category" className={({ isActive }) => isActive ? 'active' : ''}>
             Kategori
           </NavLink>
         </li>
