@@ -1,9 +1,20 @@
-export default {
-  name: 'category',
-  title: 'Category',
-  type: 'document',
+import { defineType, defineField } from "sanity";
+
+export default defineType({
+  name: "category",
+  title: "Category",
+  type: "document",
   fields: [
-    { name: 'title', title: 'Title', type: 'string' },
-    { name: 'description', title: 'Description', type: 'text' }
-  ]
-}
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "description",
+      title: "Description",
+      type: "text",
+    }),
+  ],
+});
