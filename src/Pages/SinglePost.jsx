@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getPostBySlug } from "../bloggData";
-import BlockContent from "@sanity/block-content-to-react";
+import { PortableText } from '@portabletext/react';
 
 export default function SinglePost() {
   const { slug } = useParams();
@@ -23,7 +23,7 @@ export default function SinglePost() {
       {post.mainImage?.asset?.url && (
         <img src={post.mainImage.asset.url} alt={post.title} style={{ maxWidth: "100%" }} />
       )}
-      <BlockContent blocks={post.body} />
+      <PortableText value={post.body} />
       <Link to="/">← Tillbaka</Link>
     </article>
   );
