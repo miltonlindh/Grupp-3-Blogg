@@ -11,12 +11,6 @@ export default function Nav() {
             Home
           </NavLink>
         </li>
-        
-      <li>
-        <NavLink to="/bloggar" className={({ isActive }) => isActive ? 'active' : ''}>
-          Bloggar
-        </NavLink>
-      </li>
       <li>
         <NavLink to="/category" className={({ isActive }) => isActive ? 'active' : ''}>
           Kategori
