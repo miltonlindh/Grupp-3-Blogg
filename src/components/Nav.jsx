@@ -16,9 +16,15 @@ export default function Nav() {
           Kategori
         </NavLink>
       </li>
+    
       <li>
         <NavLink to="/omoss" className={({ isActive }) => isActive ? 'active' : ''}>
           Omoss
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/admin" className={({ isActive }) => isActive ? 'active' : ''}>
+          Admin
         </NavLink>
       </li>
     </ul>
