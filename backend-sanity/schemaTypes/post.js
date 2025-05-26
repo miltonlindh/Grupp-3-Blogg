@@ -1,4 +1,4 @@
-export default {
+/*export default {
   name: 'post',
   title: 'Post',
   type: 'document',
@@ -12,3 +12,17 @@ export default {
     { name: 'body', title: 'Body', type: 'text' }
   ]
 }
+*/
+const newPost = {
+  _type: 'post',
+  title: newTitle,
+  slug: { _type: 'slug', current: newSlug },
+  author: {
+    _type: 'reference',
+    _ref: 'ID_FÖR_AUTOR', // t.ex. "123abcxyz"
+  },
+  mainImage: null, // eller en riktig bild om du har bildupload
+  categories: [],
+  publishedAt: new Date().toISOString(),
+  body: "Texten till inlägget", // kan vara en input-fält om du vill ha det
+};

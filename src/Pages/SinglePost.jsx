@@ -23,7 +23,11 @@ export default function SinglePost() {
       {post.mainImage?.asset?.url && (
         <img src={post.mainImage.asset.url} alt={post.title} style={{ maxWidth: "100%" }} />
       )}
-      <BlockContent blocks={post.body} />
+      <BlockContent
+      blocks={post.body}
+      projectId="din_project_id"
+      dataset="production"
+      />
       <Link to="/">← Tillbaka</Link>
     </article>
   );

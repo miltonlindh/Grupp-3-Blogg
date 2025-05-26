@@ -10,7 +10,7 @@ export default function Home() {
     let mounted = true;
     getAllPosts()
       .then((data) => mounted && setPosts(data))
-      .catch((err) => mounted && setError("Kunde inte hämta inlägg"))
+      .catch(() => mounted && setError("Kunde inte hämta inlägg"))
       .finally(() => mounted && setLoading(false));
     return () => (mounted = false);
   }, []);
