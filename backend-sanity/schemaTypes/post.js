@@ -1,28 +1,52 @@
-/*export default {
-  name: 'post',
-  title: 'Post',
-  type: 'document',
+import { defineType, defineField } from "sanity";
+
+export default defineType({
+  name: "post",
+  title: "Post",
+  type: "document",
   fields: [
-    { name: 'title', title: 'Title', type: 'string' },
-    { name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title', maxLength: 96 } },
-    { name: 'author', title: 'Author', type: 'reference', to: { type: 'author' } },
-    { name: 'mainImage', title: 'Main image', type: 'image', options: { hotspot: true } },
-    { name: 'categories', title: 'Categories', type: 'array', of: [{ type: 'reference', to: { type: 'category' } }] },
-    { name: 'publishedAt', title: 'Published at', type: 'datetime' },
-    { name: 'body', title: 'Body', type: 'text' }
-  ]
-}
-*/
-const newPost = {
-  _type: 'post',
-  title: newTitle,
-  slug: { _type: 'slug', current: newSlug },
-  author: {
-    _type: 'reference',
-    _ref: 'ID_FÖR_AUTOR', // t.ex. "123abcxyz"
-  },
-  mainImage: null, // eller en riktig bild om du har bildupload
-  categories: [],
-  publishedAt: new Date().toISOString(),
-  body: "Texten till inlägget", // kan vara en input-fält om du vill ha det
-};
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      validation: (Rule) => Rule.required().min(3).max(100),
+    }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: { source: "title", maxLength: 96 },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "author",
+      title: "Author",
+      type: "reference",
+      to: [{ type: "author" }],
+    }),
+    defineField({
+      name: "mainImage",
+      title: "Main image",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "categories",
+      title: "Categories",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "category" }] }],
+    }),
+    defineField({
+      name: "publishedAt",
+      title: "Published at",
+      type: "datetime",
+    }),
+    defineField({
+      name: "body",
+      title: "Body",
+      // byt gärna till Portable Text (block-format) i stället för plain text
+      // type: "array", of: [{ type: "block" }]
+      type: "text",
+    }),
+  ],
+});
