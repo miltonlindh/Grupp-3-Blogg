@@ -1,23 +1,34 @@
-/* Wrapper */
 .category-page {
   background-color: white;
   padding: 2rem;
   min-height: 100vh;
-  font-family: sans-serif;
+  font-size: large;
+  /* font-family: sans-serif; */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 /* Rubriker */
-.category-title {
+.category-title,
+.category-subtitle {
   color: #0000FF;
   text-align: center;
   margin-bottom: 1rem;
 }
 
+/* Laddningstext och status */
+.loading-text,
+.no-posts {
+  color: #0000FF;
+  font-style: italic;
+  text-align: center;
+  margin: 1rem 0;
+}
+
 /* Kategorilista */
-.category-list {
+.category-list,
+.list {
   list-style-type: none;
   padding: 0;
   margin: 1rem 0 2rem 0;
@@ -26,43 +37,45 @@
 }
 
 /* Enskilda listpunkter */
-.category-item {
+.category-item,
+.post-item {
   margin-bottom: 0.75rem;
   text-align: center;
 }
 
 /* Länkar */
-.category-link {
+.category-link,
+.post-link {
   color: #0000FF;
   text-decoration: none;
   font-weight: bold;
-}
-
-
-
-/* Mobilanpassning */
-@media (max-width: 800px) {
-  .category-page {
-    padding: 1rem;
-  }
-
-  .category-link {
-    width: 100%;
-    box-sizing: border-box;
-  }
-}
-
-
-.category-item {
+  display: inline-block;
   background-color: white;
-  /* border: 2px solid black; */
   border-radius: 10px;
   padding: 1rem;
   margin-bottom: 1rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.445);
-  transition: transform 0.2s;
+  transition: transform 0.2s ease, background-color 0.3s, color 0.3s;
 }
 
+.category-link:hover,
+.post-link:hover {
+  background-color: #FFC7C2;
+  color: #0000FF;
+  transform: scale(1.05);
+}
+/* Mobilanpassning */
+@media (max-width: 600px) {
+  .category-page {
+    padding: 1rem;
+  }
+
+  .category-link,
+  .post-link {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
 .category-item:hover {
   transform: translateY(-2px);
 }

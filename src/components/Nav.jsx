@@ -18,7 +18,7 @@ export default function Nav() {
       </li>
       <li>
         <NavLink to="/omoss" className={({ isActive }) => isActive ? 'active' : ''}>
-          Omoss
+          Om oss
         </NavLink>
       </li>
       <li>
