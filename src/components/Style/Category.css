@@ -1,0 +1,73 @@
+/* Wrapper */
+.category-page {
+  background-color: white;
+  padding: 2rem;
+  min-height: 100vh;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Rubriker */
+.category-title {
+  color: #0000FF;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Kategorilista */
+.category-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem 0 2rem 0;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* Enskilda listpunkter */
+.category-item {
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+/* Länkar */
+.category-link {
+  color: #0000FF;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+
+/* Mobilanpassning */
+@media (max-width: 800px) {
+  .category-page {
+    padding: 1rem;
+  }
+
+  .category-link {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+
+.category-item {
+  background-color: white;
+  /* border: 2px solid black; */
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.445);
+  transition: transform 0.2s;
+}
+
+.category-item:hover {
+  transform: translateY(-2px);
+}
+
+.category-link {
+  display: block;
+  width: 100%;
+}
