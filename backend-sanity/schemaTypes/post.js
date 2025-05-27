@@ -44,9 +44,8 @@ export default defineType({
     defineField({
       name: "body",
       title: "Body",
-      // byt gärna till Portable Text (block-format) i stället för plain text
-      // type: "array", of: [{ type: "block" }]
-      type: "text",
+      type: "array",
+      of: [{ type: "block" }],
     }),
   ],
 });
