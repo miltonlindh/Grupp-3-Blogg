@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { client } from '../sanity';
 import { getPostsByCategory } from '../bloggData';
+import "../components/Style/Category.css";
 
 export default function Category() {
   const { name } = useParams(); // kategori från URL (kan vara undefined)
@@ -39,16 +40,19 @@ export default function Category() {
       });
   }, [name]);
 
-  return (
-    <section>
-      <h1>Kategorier</h1>
+return (
+    <section className="category-page">
+      <h1 className="category-title">Kategorier</h1>
+
       {loadingCategories ? (
-        <p>Laddar kategorier...</p>
+        <p className="loading-text">Laddar kategorier...</p>
       ) : (
-        <ul>
+        <ul className="category-list">
           {categories.map((category) => (
-            <li key={category.title}>
-              <Link to={`/category/${category.title}`}>{category.title}</Link>
+            <li key={category.title} className="category-item">
+              <Link to={`/category/${category.title}`} className="category-link">
+                {category.title}
+              </Link>
             </li>
           ))}
         </ul>
@@ -64,7 +68,7 @@ export default function Category() {
           ) : (
             <ul>
               {posts.map((post) => (
-                <li key={post.slug.current}>
+                <li key={post.slug.current} >
                   <Link to={`/post/${post.slug.current}`}>{post.title}</Link>
                 </li>
               ))}
