@@ -4,13 +4,13 @@ import { client } from '../sanity';
 import { getPostsByCategory } from '../bloggData';
 
 export default function Category() {
-  const { name } = useParams(); // kategori från URL (kan vara undefined)
-  const [categories, setCategories] = useState([]); // alla kategorier
-  const [posts, setPosts] = useState([]);           // inlägg i vald kategori
+  const { name } = useParams(); 
+  const [categories, setCategories] = useState([]); 
+  const [posts, setPosts] = useState([]);           
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [loadingPosts, setLoadingPosts] = useState(true);
 
-  // 🔁 Hämta alla kategorier
+  //Hämtar alla kategorier 
   useEffect(() => {
     client
       .fetch(`*[_type == "category"]{title, slug}`)
@@ -24,10 +24,9 @@ export default function Category() {
       });
   }, []);
 
-  // 🔁 Hämta inlägg i vald kategori
+  //jämtar inlägg i vald kategori
   useEffect(() => {
-    if (!name) return; // om ingen kategori är vald, skippa
-
+    if (!name) return; 
     getPostsByCategory(name)
       .then((data) => {
         setPosts(data);
@@ -42,9 +41,12 @@ export default function Category() {
   return (
     <section>
       <h1>Kategorier</h1>
+
+      {/*visar laddningsmeddelande medans kategorier hämtas */}
       {loadingCategories ? (
         <p>Laddar kategorier...</p>
       ) : (
+             //lista med länkar till varje kategori
         <ul>
           {categories.map((category) => (
             <li key={category.title}>
@@ -53,7 +55,7 @@ export default function Category() {
           ))}
         </ul>
       )}
-
+{/* om en kategori är valde visas dess inlägg */}
       {name && (
         <>
           <h2>Inlägg i kategori: {name}</h2>
