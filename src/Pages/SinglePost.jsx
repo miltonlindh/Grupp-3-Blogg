@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { getPostBySlug } from "../bloggData"; //hämtar specifikt inlägg från sanity
 import BlockContent from "@sanity/block-content-to-react";//för att visa sanity bodyfält med rich text
 
-import { getPostBySlug } from "../bloggData";
+
 import { PortableText } from '@portabletext/react';
 import "../components/Style/PostList.css";
 
@@ -25,7 +25,7 @@ export default function SinglePost() {
   if (!post)    return <p>Hittade inte inlägg</p>;
 
   return (
-
+<>
     <article>
       <h1>{post.title}</h1>
        {/*visar bild om det finns en */}
@@ -69,6 +69,6 @@ export default function SinglePost() {
   </button>
   </div>
 </article>
-
+</>
   );
 }

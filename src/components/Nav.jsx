@@ -8,7 +8,7 @@ export default function Nav() {
       <ul className="nav-list">
         <li>
           <NavLink to="/" end className={({ isActive }) => isActive ? 'active' : ''}>
-            Home
+            Hem
           </NavLink>
         </li>
       <li>
@@ -18,7 +18,7 @@ export default function Nav() {
       </li>
       <li>
         <NavLink to="/omoss" className={({ isActive }) => isActive ? 'active' : ''}>
-          Omoss
+          Om oss
         </NavLink>
       </li>
       <li>

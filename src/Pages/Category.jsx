@@ -5,13 +5,16 @@ import { getPostsByCategory } from '../bloggData';
 import "../components/Style/Category.css";
 
 export default function Category() {
+  //plockar ur kategorinamnet från URLen
   const { name } = useParams(); 
+  //här lagras alla kategorier samt alla inlägg som hör till
   const [categories, setCategories] = useState([]); 
   const [posts, setPosts] = useState([]);           
+  //laddningstatus för alla kategorier och inlägg
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [loadingPosts, setLoadingPosts] = useState(true);
 
-  //Hämtar alla kategorier 
+  // Hämta alla kategorier
   useEffect(() => {
     client
       .fetch(`*[_type == "category"]{title, slug}`)
@@ -25,7 +28,7 @@ export default function Category() {
       });
   }, []);
 
-  //jämtar inlägg i vald kategori
+  // Hämta inlägg i vald kategori
   useEffect(() => {
     if (!name) return; 
     getPostsByCategory(name)
@@ -38,27 +41,15 @@ export default function Category() {
         setLoadingPosts(false);
       });
   }, [name]);
-
+//renderar ut kategori sidan
   return (
-    <section>
-      <h1>Kategorier</h1>
-
-      {/*visar laddningsmeddelande medans kategorier hämtas */}
-
-return (
     <section className="category-page">
       <h1 className="category-title">Kategorier</h1>
-
 
       {loadingCategories ? (
         <p className="loading-text">Laddar kategorier...</p>
       ) : (
-
-             //lista med länkar till varje kategori
-        <ul>
-
         <ul className="category-list">
-
           {categories.map((category) => (
             <li key={category.title} className="category-item">
               <Link to={`/category/${category.title}`} className="category-link">
@@ -68,19 +59,21 @@ return (
           ))}
         </ul>
       )}
-{/* om en kategori är valde visas dess inlägg */}
+
       {name && (
         <>
-          <h2>Inlägg i kategori: {name}</h2>
+          <h2 className="category-subtitle">Inlägg i kategori: {name}</h2>
           {loadingPosts ? (
-            <p>Laddar inlägg...</p>
+            <p className="loading-text">Laddar inlägg...</p>
           ) : posts.length === 0 ? (
-            <p>Inga inlägg hittades i denna kategori.</p>
+            <p className="empty-text">Inga inlägg hittades i denna kategori.</p>
           ) : (
-            <ul>
+            <ul className="post-list">
               {posts.map((post) => (
-                <li key={post.slug.current} >
-                  <Link to={`/post/${post.slug.current}`}>{post.title}</Link>
+                <li key={post.slug.current} className="post-item">
+                  <Link to={`/post/${post.slug.current}`} className="post-link">
+                    {post.title}
+                  </Link>
                 </li>
               ))}
             </ul>
