@@ -5,12 +5,17 @@ import { getPostsByCategory } from '../bloggData';
 import "../components/Style/Category.css";
 
 export default function Category() {
-  const { name } = useParams();
-  const [categories, setCategories] = useState([]);
-  const [posts, setPosts] = useState([]);
+
+  //plockar ur kategorinamnet från URLen
+  const { name } = useParams(); 
+  //här lagras alla kategorier samt alla inlägg som hör till
+  const [categories, setCategories] = useState([]); 
+  const [posts, setPosts] = useState([]);           
+  //laddningstatus för alla kategorier och inlägg
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [loadingPosts, setLoadingPosts] = useState(true);
 
+ 
   useEffect(() => {
     client
       .fetch(`*[_type == "category"]{title, slug}`)
@@ -23,6 +28,9 @@ export default function Category() {
         setLoadingCategories(false);
       });
   }, []);
+
+
+  // Hämta inlägg i vald kategori
 
   useEffect(() => {
     if (!name) return;
@@ -37,7 +45,7 @@ export default function Category() {
         setLoadingPosts(false);
       });
   }, [name]);
-
+//renderar ut kategori sidan
   return (
     <section className="category-page">
       <h1 className="category-title">Kategorier</h1>
@@ -62,9 +70,15 @@ export default function Category() {
           {loadingPosts ? (
             <p className="loading-text">Laddar inlägg...</p>
           ) : posts.length === 0 ? (
+
+            <p className="empty-text">Inga inlägg hittades i denna kategori.</p>
+          ) : (
+            <ul className="post-list">
+
             <p className="no-posts">Inga inlägg hittades i denna kategori.</p>
           ) : (
             <ul className="list">
+
               {posts.map((post) => (
                 <li key={post.slug.current} className="post-item">
                   <Link to={`/post/${post.slug.current}`} className="post-link">
