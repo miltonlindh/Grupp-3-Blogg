@@ -6,16 +6,18 @@ import "../components/Style/Category.css";
 
 export default function Category() {
 
-  //plockar ur kategorinamnet från URLen
+  // plockar ur kategorinamnet från URLen (typ /category/Natur)
   const { name } = useParams(); 
-  //här lagras alla kategorier samt alla inlägg som hör till
+
+  // här lagras alla kategorier samt inlägg i vald kategori
   const [categories, setCategories] = useState([]); 
   const [posts, setPosts] = useState([]);           
-  //laddningstatus för alla kategorier och inlägg
+
+  // laddningsstatus för kategorier och inlägg
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [loadingPosts, setLoadingPosts] = useState(true);
 
- 
+  // hämta alla kategorier från Sanity när komponenten laddas
   useEffect(() => {
     client
       .fetch(`*[_type == "category"]{title, slug}`)
@@ -29,9 +31,7 @@ export default function Category() {
       });
   }, []);
 
-
-  // Hämta inlägg i vald kategori
-
+  // hämta inlägg som hör till den valda kategorin
   useEffect(() => {
     if (!name) return;
 
@@ -45,11 +45,13 @@ export default function Category() {
         setLoadingPosts(false);
       });
   }, [name]);
-//renderar ut kategori sidan
+
+  // här ritas hela sidan ut
   return (
     <section className="category-page">
       <h1 className="category-title">Kategorier</h1>
 
+      {/* visar "laddar..." om kategorier inte är hämtade än */}
       {loadingCategories ? (
         <p className="loading-text">Laddar kategorier...</p>
       ) : (
@@ -64,21 +66,17 @@ export default function Category() {
         </ul>
       )}
 
+      {/* om en kategori är vald – visa alla inlägg i den */}
       {name && (
         <>
           <h2 className="category-subtitle">Inlägg i kategori: {name}</h2>
+
           {loadingPosts ? (
             <p className="loading-text">Laddar inlägg...</p>
           ) : posts.length === 0 ? (
-
             <p className="empty-text">Inga inlägg hittades i denna kategori.</p>
           ) : (
             <ul className="post-list">
-
-            <p className="no-posts">Inga inlägg hittades i denna kategori.</p>
-          ) : (
-            <ul className="list">
-
               {posts.map((post) => (
                 <li key={post.slug.current} className="post-item">
                   <Link to={`/post/${post.slug.current}`} className="post-link">
