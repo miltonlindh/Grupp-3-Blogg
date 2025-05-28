@@ -16,7 +16,13 @@ export default function Category() {
     client
       .fetch(`*[_type == "category"]{title, slug}`)
       .then((data) => {
-        setCategories(data);
+        // Ta bort alla dubbletter baserat på category.title
+        const uniqueCategories = data.filter(
+          (category, index, self) =>
+            index === self.findIndex((c) => c.title === category.title)
+        );
+  
+        setCategories(uniqueCategories);
         setLoadingCategories(false);
       })
       .catch((err) => {
@@ -24,21 +30,6 @@ export default function Category() {
         setLoadingCategories(false);
       });
   }, []);
-
-  // 🔁 Hämta inlägg i vald kategori
-  useEffect(() => {
-    if (!name) return; // om ingen kategori är vald, skippa
-
-    getPostsByCategory(name)
-      .then((data) => {
-        setPosts(data);
-        setLoadingPosts(false);
-      })
-      .catch((err) => {
-        console.error('Kunde inte hämta kategoriposter:', err);
-        setLoadingPosts(false);
-      });
-  }, [name]);
 
 return (
     <section className="category-page">
