@@ -1,7 +1,7 @@
 // src/bloggData.js
 import { client } from "./sanity";
 
-// Alla publicerade poster (titel, slug + bild‑URL)
+//hämtar alla poster nyaste först
 export function getAllPosts() {
   return client.fetch(`*[_type == "post"]|order(_createdAt desc){
     _id,
@@ -11,7 +11,7 @@ export function getAllPosts() {
   }`);
 }
 
-// En post via slug
+//hämtar en specifik post via dens slug
 export function getPostBySlug(slug) {
   return client.fetch(`*[_type == "post" && slug.current == $slug][0]{
     title,
@@ -20,7 +20,7 @@ export function getPostBySlug(slug) {
   }`, { slug });
 }
 
-// Poster i en kategori
+//hämtar alla posts som tillhör en viss kategori
 export function getPostsByCategory(name) {
   return client.fetch(`*[_type == "post" && references(*[_type == "category" && title == $name]._id)]{
     title,

@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Admin from './Pages/Admin'
 import Nav from './components/Nav';
-import Omoss from './pages/Omoss';
+import Omoss from './Pages/Omoss';
 import Home from './Pages/Home';
 import SinglePost from './Pages/SinglePost';
 import Category from './Pages/Category';
