@@ -1,12 +1,61 @@
-# React + Vite
+# Grupp 3-Blog
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##Funktioner
+- Visar alla blogginlägg på startsidan
+- visa inlägg per kategori
+- visa ensklida inlägg med bild och innehåll
+- Adminpanel för:
+  - Logga in
+  - Skapa nytt inlägg
+  - redigera befintliga inlägg
+  - ta bort inlägg
+  - välja kategori för inlägg
+## Tekniker
+- **react** för frontend
+- **React Router** för navigering
+- **Sanity** för headless cms
+- **@sanity/client** för att hämta och skicka data
+- **Cypress** för tester
 
-Currently, two official plugins are available:
+## Installation
+```bash
+   git clone https://github.com/miltonlindh/Grupp-3-Blogg.git
+   cd Grupp-3-Blogg
+   npm install
+   npm run dev
+```
+## Lösenhord för Admin panelen
+```
+hemligt
+```
+## Kodexempel
+### Hämta alla blogginlägg, BloggData.js
+```js
+export function getAllPosts() {
+  return client.fetch(`*[_type == "post"]|order(_createdAt desc){
+    _id, title, slug, mainImage{asset->{url}}
+  }`);
+}
+```
+### Rendera inlägg på Home.jsx
+```js
+useEffect(() => {
+  getAllPosts()
+    .then((data) => setPosts(data))
+    .finally(() => setLoading(false));
+}, []);
+```
+### Skapa inlägg i Admin.jsx
+```js
+const newPost = {
+  _type: 'post',
+  title: newTitle,
+  slug: { _type: 'slug', current: newSlug },
+  categories: selectedCategoryId ? [{
+    _type: 'reference', _ref: selectedCategoryId
+  }] : []
+};
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+client.create(newPost)
+```
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
