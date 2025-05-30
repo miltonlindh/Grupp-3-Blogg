@@ -1,6 +1,6 @@
 # Grupp 3-Blog
 
-##Funktioner
+## Funktioner
 - Visar alla blogginlägg på startsidan
 - visa inlägg per kategori
 - visa ensklida inlägg med bild och innehåll
